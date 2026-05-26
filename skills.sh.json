@@ -6,6 +6,20 @@
   "source": "agent-skills",
   "skills": [
     {
+      "name": "project-starter",
+      "description": "Scaffold new projects from scratch using a predefined modern TypeScript tech stack. Use whenever the user wants to create a new project, initialize a codebase, set up project structure, configure tooling, install dependencies, or bootstrap a frontend/backend application. This skill handles the full setup including package.json, tsconfig, ESLint, Prettier, Vite, React, MUI, testing, and optional AI stack configuration.",
+      "path": "skills/project-starter",
+      "entry": "SKILL.md",
+      "tags": ["project", "scaffold", "typescript", "vite", "react", "node"],
+      "files": [
+        "SKILL.md",
+        "references/frontend.md",
+        "references/backend.md",
+        "references/testing.md",
+        "references/ai-stack.md"
+      ]
+    },
+    {
       "name": "langchain-ts",
       "description": "Comprehensive guide for building AI agents with LangChain TypeScript SDK. Covers LangChain agents, LangGraph orchestration, Deep Agents harness, tools, models, middleware, memory, streaming, and provider integrations. Use when working with langchain npm packages, creating ReAct agents, building stateful workflows with StateGraph, implementing tool-calling loops, or integrating LLM providers (OpenAI, Anthropic, Google, etc.) in TypeScript/JavaScript.",
       "path": "skills/langchain-ts",

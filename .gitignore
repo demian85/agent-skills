@@ -1,0 +1,11 @@
+# System directories
+.omo/
+.DS_Store
+
+# Node
+node_modules/
+*.log
+
+# IDE
+.idea/
+.vscode/

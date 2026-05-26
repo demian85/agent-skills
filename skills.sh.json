@@ -1,0 +1,48 @@
+{
+  "$schema": "https://skills.sh/schema.json",
+  "name": "agent-skills",
+  "description": "Custom agent skills for AI coding assistants - LangChain, MUI, and Serverless Framework best practices",
+  "version": "1.0.0",
+  "source": "agent-skills",
+  "skills": [
+    {
+      "name": "langchain-ts",
+      "description": "Comprehensive guide for building AI agents with LangChain TypeScript SDK. Covers LangChain agents, LangGraph orchestration, Deep Agents harness, tools, models, middleware, memory, streaming, and provider integrations. Use when working with langchain npm packages, creating ReAct agents, building stateful workflows with StateGraph, implementing tool-calling loops, or integrating LLM providers (OpenAI, Anthropic, Google, etc.) in TypeScript/JavaScript.",
+      "path": "skills/langchain-ts",
+      "entry": "SKILL.md",
+      "tags": ["ai", "agents", "langchain", "typescript", "llm"],
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "mui",
+      "description": "Material-UI v9 component library patterns including sx prop styling, theme integration, responsive design, CSS container queries, cascade layers, and new components (NumberField, Menubar). Use when working with MUI v9 components, styling with sx prop, theme customization, migrating from v7, or MUI utilities.",
+      "path": "skills/mui",
+      "entry": "SKILL.md",
+      "tags": ["react", "mui", "material-ui", "styling", "ui", "v9"],
+      "files": [
+        "SKILL.md",
+        "resources/component-library.md",
+        "resources/styling-guide.md",
+        "resources/theme-customization.md",
+        "resources/v9-breaking-changes.md"
+      ]
+    },
+    {
+      "name": "serverless-framework",
+      "description": "Comprehensive Serverless Framework skill for AWS Lambda, API Gateway, and serverless application development. Use when working with serverless.yml configuration, Serverless Framework CLI commands, deploying Lambda functions, configuring API Gateway (REST/HTTP/Websocket), setting up event triggers (S3, SQS, SNS, DynamoDB Streams, Schedule), managing serverless deployments, troubleshooting serverless applications, or integrating with the Serverless MCP Server. Covers serverless architecture patterns, IaC best practices, CI/CD workflows, and AWS serverless service integrations.",
+      "path": "skills/serverless-framework",
+      "entry": "SKILL.md",
+      "tags": ["aws", "serverless", "lambda", "api-gateway", "infrastructure", "cloud"],
+      "files": [
+        "SKILL.md",
+        "references/cli.md",
+        "references/events.md",
+        "references/mcp-tools.md",
+        "references/serverless-yml.md",
+        "references/variables.md"
+      ]
+    }
+  ]
+}

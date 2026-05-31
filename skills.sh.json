@@ -57,6 +57,19 @@
         "references/serverless-yml.md",
         "references/variables.md"
       ]
+    },
+    {
+      "name": "grammy-bot-builder",
+      "description": "Comprehensive skill for building Telegram bots with grammY (TypeScript/Node.js/Bun/Deno). Use whenever the user mentions Telegram bots, grammY, bot commands, inline keyboards, bot webhooks, bot sessions, bot conversations, inline queries, or building a chatbot with TypeScript/Node.js/Bun. Also use for debugging bot issues, adding features to existing bots, looking up grammY API patterns, or setting up long-polling/webhook bots on a custom VPS. Covers core API, all official plugins, middleware patterns, sessions, interactive menus, conversations, file handling, error handling, and local hosting.",
+      "path": "skills/grammy-bot-builder",
+      "entry": "SKILL.md",
+      "tags": ["telegram", "bot", "grammy", "typescript", "nodejs", "bun", "deno", "chatbot", "webhook"],
+      "files": [
+        "SKILL.md",
+        "references/core-api.md",
+        "references/plugins.md",
+        "references/patterns.md"
+      ]
     }
   ]
 }

@@ -10,6 +10,7 @@ Useful skills for coding agents. This repository contains custom agent skills th
 | [langchain-ts](skills/langchain-ts) | Comprehensive guide for building AI agents with LangChain TypeScript SDK |
 | [mui](skills/mui) | Material-UI v9 component library patterns, styling, and theme integration |
 | [serverless-framework](skills/serverless-framework) | AWS Lambda, API Gateway, and serverless application development |
+| [grammy-bot-builder](skills/grammy-bot-builder) | Build Telegram bots with grammY (TypeScript/Node.js/Bun/Deno) |
 
 ## Install
 

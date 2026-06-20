@@ -1,0 +1,91 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {},
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      ".env.example": "allow",
+      "/tmp/**/*": "allow",
+    },
+    "edit": {
+      "*": "allow",
+      ".env": "deny",
+      ".env.*": "deny",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      ".env.example": "allow",
+    },
+    "external_directory": {
+      "*": "ask",
+      "~/.agents/**": "allow",
+    },
+    // "bash": {
+    //   "*": "allow",
+
+    //   "env": "deny",
+    //   "env *": "deny",
+    //   "printenv": "deny",
+    //   "printenv *": "deny",
+    //   "set": "deny",
+
+    //   "git *": "allow",
+    //   "npm *": "allow",
+    //   "pnpm *": "allow",
+    //   "grep *": "allow",
+    //   "ls *": "allow",
+    //   "tail *": "allow",
+    //   "head *": "allow",
+    //   "find *": "allow",
+    //   "python3 *": "allow",
+    // },
+  },
+  "agent": {
+    "build": {
+      "model": "openai/gpt-5.5",
+      "variant": "low",
+    },
+    "plan": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+    },
+    "Builder": {
+      "description": "Builder agent - can read, write, edit files and run commands",
+      "prompt": "{file:./prompts/builder.md}",
+      "mode": "primary",
+      "model": "openai/gpt-5.5",
+      "variant": "medium",
+    },
+    "Venice Grok Builder": {
+      "description": "Builder agent - can read, write, edit files and run commands",
+      "prompt": "{file:./prompts/venice-grok-builder.md}",
+      "mode": "primary",
+      "model": "venice/grok-4-3",
+      "venice_parameters": {
+        "include_venice_system_prompt": false,
+        "enable_web_search": "on",
+        "enable_web_scraping": true,
+        "enable_x_search": true,
+      },
+    },
+    "Planner": {
+      "description": "Planner agent - can only plan and give instructions to Builder",
+      "prompt": "{file:./prompts/planner.md}",
+      "mode": "primary",
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "allow",
+        "websearch": "allow",
+      },
+    },
+  },
+  "plugin": ["oh-my-openagent@latest"],
+}

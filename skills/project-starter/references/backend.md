@@ -10,19 +10,19 @@ Complete guide for setting up a Node.js backend/API project with TypeScript.
 
 ## Dependencies
 
-```json
-{
-  "dependencies": {
-    "lodash-es": "^4.0.0",
-    "luxon": "^3.0.0",
-    "zod": "^3.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^6.0.0",
-    "@types/node": "^22.0.0",
-    "tsx": "^4.0.0"
-  }
-}
+Verify current stable versions first:
+
+```bash
+for package in lodash-es luxon zod pino typescript @types/node tsx; do
+  npm view "$package" version
+done
+```
+
+Install only the packages the project needs:
+
+```bash
+npm install lodash-es luxon zod pino
+npm install -D typescript @types/node tsx
 ```
 
 ## TypeScript Configuration
@@ -86,16 +86,15 @@ server.listen(PORT, () => {
 })
 ```
 
+For production backends, prefer structured JSON logs over `console.log`. Use `pino` directly or the framework's Pino integration so log records keep machine-readable fields.
+
 ## Using Fastify (Recommended)
 
 For production APIs, Fastify is a fast and low-overhead framework:
 
-```json
-{
-  "dependencies": {
-    "fastify": "^5.0.0"
-  }
-}
+```bash
+npm view fastify version
+npm install fastify
 ```
 
 ```typescript
@@ -110,6 +109,29 @@ app.get('/health', async () => {
 
 app.listen({ port: 3000, host: '0.0.0.0' })
 ```
+
+## Pino JSON Logging
+
+Use Pino when the backend needs application logs outside a framework logger:
+
+```typescript
+// src/logger.ts
+import pino from 'pino'
+
+export const logger = pino({
+  level: process.env.LOG_LEVEL ?? 'info',
+  base: undefined,
+})
+```
+
+```typescript
+import { logger } from './logger.js'
+
+logger.info({ route: '/health' }, 'request handled')
+logger.error({ err }, 'request failed')
+```
+
+Keep secrets, request bodies, and authorization headers out of logs unless the user explicitly asks for redaction rules and you implement them.
 
 ## Zod Schema Validation
 
@@ -129,7 +151,7 @@ export type User = z.infer<typeof UserSchema>
 // Usage in route handler:
 const result = UserSchema.safeParse(request.body)
 if (!result.success) {
-  return reply.status(400).send({ errors: result.error.errors })
+  return reply.status(400).send({ errors: result.error.issues })
 }
 ```
 

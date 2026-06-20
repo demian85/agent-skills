@@ -7,13 +7,14 @@
   "skills": [
     {
       "name": "project-starter",
-      "description": "Scaffold new projects from scratch using a predefined modern TypeScript tech stack. Use whenever the user wants to create a new project, initialize a codebase, set up project structure, configure tooling, install dependencies, or bootstrap a frontend/backend application. This skill handles the full setup including package.json, tsconfig, ESLint, Prettier, Vite, React, MUI, testing, and optional AI stack configuration.",
+      "description": "Scaffold new projects from scratch using a modern TypeScript tech stack. Use whenever the user wants to create a new project, initialize a codebase, set up project structure, configure tooling, install dependencies, create AGENTS.md project instructions, or bootstrap a frontend/backend/fullstack application. This skill handles package.json, tsconfig, ESLint, Prettier, Vite or Next.js, React, MUI, testing, backend logging, and optional AI stack configuration.",
       "path": "skills/project-starter",
       "entry": "SKILL.md",
-      "tags": ["project", "scaffold", "typescript", "vite", "react", "node"],
+      "tags": ["project", "scaffold", "typescript", "vite", "nextjs", "react", "node"],
       "files": [
         "SKILL.md",
         "references/frontend.md",
+        "references/nextjs.md",
         "references/backend.md",
         "references/testing.md",
         "references/ai-stack.md"

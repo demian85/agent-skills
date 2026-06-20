@@ -1,8 +1,10 @@
 # Frontend Setup Reference
 
-Complete guide for setting up a React + Vite + MUI v9 frontend project using the project starter stack.
+Complete guide for setting up a React + Vite + MUI frontend project using the project starter stack.
 
 ## Dependencies
+
+Before installing, verify current stable versions with `npm view <package> version`. The commands below intentionally omit versions so npm resolves the latest stable release at scaffold time.
 
 ### Production
 
@@ -220,15 +222,15 @@ export const router = createBrowserRouter([
 ])
 ```
 
-## MUI v9 Setup Notes
+## MUI Setup Notes
 
 - Import components from `@mui/material` (tree-shaking works with Vite)
 - Use the `sx` prop for inline styling; prefer extracting to `SxProps<Theme>` objects for reusable styles
-- MUI v9 requires React 19. If using React 18, pin `react-is` to match your React version via npm overrides
+- Check the current MUI peer dependency requirements before choosing React and `react-is` versions
 - Roboto font is required — import all four weights (300, 400, 500, 700) in your entry point
 
-## React Router v7 Notes
+## React Router Notes
 
-- React Router v7 merges `react-router-dom` into `react-router`. Import everything from `react-router`.
+- Verify the current React Router major before scaffolding. Current modern versions use the `react-router` package for DOM routing.
 - Use `createBrowserRouter` + `RouterProvider` for data API features (loaders, actions)
 - `BrowserRouter` is still available for simpler use cases but lacks data API features

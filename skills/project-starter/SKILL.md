@@ -1,11 +1,11 @@
 ---
 name: project-starter
-description: Scaffold new projects from scratch using a predefined modern TypeScript tech stack. Use whenever the user wants to create a new project, initialize a codebase, set up project structure, configure tooling, install dependencies, or bootstrap a frontend/backend application. This skill handles the full setup including package.json, tsconfig, ESLint, Prettier, Vite, React, MUI, testing, and optional AI stack configuration. Trigger on phrases like "create project", "new project", "scaffold", "bootstrap", "init project", "setup project", "project structure", or whenever generating config files for a new codebase.
+description: Scaffold new projects from scratch using a modern TypeScript tech stack. Use whenever the user wants to create a new project, initialize a codebase, set up project structure, configure tooling, install dependencies, create AGENTS.md project instructions, or bootstrap a frontend/backend/fullstack application. This skill handles package.json, tsconfig, ESLint, Prettier, Vite or Next.js, React, MUI, testing, backend logging, and optional AI stack configuration. Trigger on phrases like "create project", "new project", "scaffold", "bootstrap", "init project", "setup project", "project structure", or whenever generating config files for a new codebase.
 ---
 
 # Project Starter
 
-Scaffold modern TypeScript projects with a consistent, battle-tested tech stack. This skill generates configuration files, directory structures, and dependency lists for new projects — covering both frontend (React + Vite) and backend (Node.js) setups, plus optional AI tooling.
+Scaffold modern TypeScript projects with a consistent, battle-tested tech stack. This skill generates configuration files, directory structures, and dependency lists for new projects, covering frontend (React + Vite or Next.js), backend (Node.js), fullstack, and optional AI tooling.
 
 ## When to Use This Skill
 
@@ -14,16 +14,19 @@ Scaffold modern TypeScript projects with a consistent, battle-tested tech stack.
 - Setting up TypeScript, ESLint, Prettier, or Vite configs
 - Generating package.json with the predefined stack
 - Bootstrapping a React frontend or Node.js backend
+- Choosing Next.js when frontend routes need a small backend, server actions, API routes, or secret-bearing inference calls
 - Adding testing infrastructure (Vitest) to a new project
 - Setting up AI/agent tooling (LangChain, MCP)
+- Creating an `AGENTS.md` with project-specific coding-agent instructions
 
 ## Core Principles
 
 1. **ESM-first**: All projects use `"type": "module"` in package.json. Every config file is ESM.
 2. **TypeScript-native**: tsconfig extends official bases. No `any` suppression. Strict mode enabled.
-3. **Standard tooling**: ESLint flat config, Prettier with consistent rules, Vite for bundling.
+3. **Standard tooling**: ESLint flat config, Prettier with consistent rules, and Vite or Next.js for frontend runtime.
 4. **Minimal overrides**: Use well-known config presets without custom rule overrides. Add rules only when there's a clear reason.
-5. **Latest stable**: Pin to latest stable versions at time of scaffolding. Use `^` ranges in package.json for flexibility.
+5. **Verify latest stable first**: Treat package names in this skill as recommendations, not pinned install orders. Check the latest stable package versions at scaffold time, then choose exact pins or `^` ranges based on the project's reproducibility needs.
+6. **Agent-ready**: Every scaffolded project gets an `AGENTS.md` so future coding agents know the stack, commands, and local constraints.
 
 ## Base Stack
 
@@ -35,12 +38,13 @@ Every project starts with these foundations:
 | TypeScript | Type system | `tsconfig.json` (extends `@tsconfig/node-lts`) |
 | ESLint | Linting | `eslint.config.mjs` (flat config) |
 | Prettier | Formatting | `.prettierrc` |
-| Vite | Bundler/dev server | `vite.config.ts` |
+| Vite or Next.js | Frontend runtime | `vite.config.ts` or Next.js app router files |
+| AGENTS.md | Agent instructions | `AGENTS.md` |
 
 ### Node.js Requirements
 
-- **Minimum**: Node.js 20.19.0 (supports `require(esm)`)
-- **Recommended**: Node.js 22.12.0+ LTS or 24.x
+- **Minimum**: Match the engines required by the selected framework and verified package versions.
+- **Recommended**: Use the current active Node.js LTS unless the target deployment platform requires a different supported LTS.
 - All projects use full ESM: `"type": "module"` in package.json
 
 ### TypeScript Configuration
@@ -176,23 +180,24 @@ For Node.js library/backend projects without a frontend, Vite may not be needed.
 
 ## Frontend Stack
 
-When scaffolding a frontend project, add these dependencies:
+When scaffolding a frontend project, verify the latest stable package versions first, then add the packages that match the chosen app shape.
 
 ### Core Framework
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `react` | `^19.0.0` | UI framework |
-| `react-dom` | `^19.0.0` | DOM renderer |
-| `react-router` | `^7.0.0` | Routing (all-in-one, replaces react-router-dom) |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `react` | Verify latest stable | UI framework |
+| `react-dom` | Verify latest stable | DOM renderer |
+| `react-router` | Verify latest stable | Client-side routing for Vite apps |
+| `next` | Verify latest stable | Fullstack React framework when routes need backend behavior |
 
-React 19 is ESM-native. React Router v7 merges `react-router-dom` into the main `react-router` package.
+Use Vite + React for static/client-heavy apps that already have an API. Choose Next.js when the frontend needs a small backend, there is no existing API to connect to, routing benefits from server code, or secrets such as AI inference keys must stay off the client. When choosing Next.js, use the `vercel-react-best-practices` skill as the primary implementation guide and this skill only for shared scaffolding concerns like dependency verification, `AGENTS.md`, and baseline tooling.
 
 ### State & Data
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `@tanstack/react-query` | `^5.0.0` | Server state, caching, mutations |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `@tanstack/react-query` | Verify latest stable | Server state, caching, mutations |
 
 Install alongside the devtools for debugging:
 ```bash
@@ -201,15 +206,15 @@ npm install @tanstack/react-query-devtools
 
 ### UI Components
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `@mui/material` | `^9.0.0` | Component library |
-| `@mui/icons-material` | `^9.0.0` | Material icons |
-| `@emotion/react` | `^11.0.0` | CSS-in-JS engine |
-| `@emotion/styled` | `^11.0.0` | Styled components |
-| `@fontsource/roboto` | latest | Default MUI font |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `@mui/material` | Verify latest stable | Component library |
+| `@mui/icons-material` | Verify latest stable | Material icons |
+| `@emotion/react` | Verify latest stable | CSS-in-JS engine |
+| `@emotion/styled` | Verify latest stable | Styled components |
+| `@fontsource/roboto` | Verify latest stable | Default MUI font |
 
-MUI v9 uses Emotion by default. Import Roboto font weights 300, 400, 500, 700 in your app entry point.
+MUI uses Emotion by default. Import Roboto font weights 300, 400, 500, 700 in your app entry point unless the design system specifies a different font.
 
 ### Frontend Directory Structure
 
@@ -234,10 +239,13 @@ my-app/
 ├── tsconfig.json
 ├── eslint.config.mjs
 ├── .prettierrc
+├── AGENTS.md
 └── package.json
 ```
 
 For the complete frontend setup guide, see [references/frontend.md](references/frontend.md).
+
+For Next.js projects, see [references/nextjs.md](references/nextjs.md) and then defer to the `vercel-react-best-practices` skill for framework-specific implementation details.
 
 ## Backend Stack
 
@@ -245,18 +253,19 @@ When scaffolding a Node.js backend/API project:
 
 ### Core Dependencies
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `typescript` | `^6.0.0` | Type compiler |
-| `@types/node` | `^22.0.0` | Node.js type definitions |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `typescript` | Verify latest stable | Type compiler |
+| `@types/node` | Verify latest stable for target Node major | Node.js type definitions |
 
 ### Recommended Libraries
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `lodash-es` | `^4.0.0` | Utility functions (ESM build) |
-| `luxon` | `^3.0.0` | Date/time management |
-| `zod` | `^3.0.0` | Schema validation, JSON parsing |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `lodash-es` | Verify latest stable | Utility functions (ESM build) |
+| `luxon` | Verify latest stable | Date/time management |
+| `zod` | Verify latest stable | Schema validation, JSON parsing |
+| `pino` | Verify latest stable | Structured JSON logging for backend services |
 
 ### Backend Directory Structure
 
@@ -277,6 +286,7 @@ my-api/
 ├── tsconfig.json
 ├── eslint.config.mjs
 ├── .prettierrc
+├── AGENTS.md
 └── package.json
 ```
 
@@ -286,11 +296,11 @@ For the complete backend setup guide, see [references/backend.md](references/bac
 
 When the project needs AI/agent capabilities:
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `langchain` | `^1.0.0` | Agent framework |
-| `@langchain/core` | `^1.0.0` | Core abstractions |
-| `mcp-use` | `^1.0.0` | MCP client/agent integration |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `langchain` | Verify latest stable | Agent framework |
+| `@langchain/core` | Verify compatible stable | Core abstractions |
+| `mcp-use` | Verify latest stable | MCP client/agent integration |
 
 ### Critical Peer Dependency Note
 
@@ -299,9 +309,9 @@ All LangChain packages must share the **exact same version** of `@langchain/core
 ```json
 {
   "dependencies": {
-    "langchain": "^1.4.0",
-    "@langchain/core": "~1.1.0",
-    "mcp-use": "^1.28.0"
+    "langchain": "<verified-latest-compatible>",
+    "@langchain/core": "<verified-compatible-core>",
+    "mcp-use": "<verified-latest>"
   }
 }
 ```
@@ -314,11 +324,11 @@ For the complete AI stack setup, see [references/ai-stack.md](references/ai-stac
 
 Every project should include testing infrastructure:
 
-| Package | Version Range | Purpose |
-|---------|--------------|---------|
-| `vitest` | `^4.0.0` | Test runner (Vite-native) |
-| `@vitest/coverage-v8` | `^4.0.0` | Code coverage |
-| `happy-dom` or `jsdom` | latest | DOM environment for frontend tests |
+| Package | Version Guidance | Purpose |
+|---------|------------------|---------|
+| `vitest` | Verify latest stable | Test runner |
+| `@vitest/coverage-v8` | Verify same major/minor as Vitest | Code coverage |
+| `happy-dom` or `jsdom` | Verify latest stable | DOM environment for frontend tests |
 
 Vitest config in `vite.config.ts`:
 
@@ -351,11 +361,14 @@ When asked to scaffold a project, follow this order:
 
 1. **Determine project type**: frontend, backend, or fullstack?
 2. **Check for existing files**: Don't overwrite existing configs without confirming.
-3. **Generate package.json**: Include `"type": "module"`, scripts, and dependencies.
-4. **Generate config files**: tsconfig, eslint, prettier, vite (if frontend).
-5. **Create directory structure**: Use the templates above.
-6. **Add optional stacks**: Frontend deps, AI deps, testing deps based on requirements.
-7. **Write a README.md**: Basic project setup instructions (install, dev, build, test).
+3. **Choose frontend runtime**: Vite for client apps with an existing API; Next.js when a small backend, server routing, or secret handling is required.
+4. **Verify package versions**: Run `npm view <package> version` for every selected package and check Node.js LTS compatibility before writing package.json.
+5. **Generate package.json**: Include `"type": "module"` when appropriate, scripts, and dependencies.
+6. **Generate config files**: tsconfig, eslint, prettier, vite or Next.js files as needed.
+7. **Create directory structure**: Use the templates above.
+8. **Create AGENTS.md**: Prefer an available init command or external skill/plugin that generates agent instructions, such as OpenCode or oh-my-openagent. If none is available, create a concise `AGENTS.md` with stack, commands, test expectations, and local constraints.
+9. **Add optional stacks**: Frontend deps, AI deps, testing deps based on requirements.
+10. **Write a README.md**: Basic project setup instructions (install, dev, build, test).
 
 ### Example package.json Scripts
 
@@ -392,30 +405,73 @@ For backend-only projects, replace Vite scripts with:
 }
 ```
 
-## Version Reference
+## Version Verification
 
-These are the latest stable versions at the time of this skill's creation. Use `^` ranges in package.json to allow patch/minor updates:
+Do not treat any version in this repository as a strict install order. Before scaffolding, verify the current stable release for every package you plan to install:
 
-| Package | Latest Stable |
-|---------|--------------|
-| typescript | ^6.0.0 |
-| @types/node | ^22.0.0 |
-| vite | ^8.0.0 |
-| react | ^19.0.0 |
-| react-dom | ^19.0.0 |
-| react-router | ^7.0.0 |
-| @tanstack/react-query | ^5.0.0 |
-| @mui/material | ^9.0.0 |
-| @mui/icons-material | ^9.0.0 |
-| eslint | ^10.0.0 |
-| typescript-eslint | ^8.0.0 |
-| prettier | ^3.0.0 |
-| vitest | ^4.0.0 |
-| lodash-es | ^4.0.0 |
-| luxon | ^3.0.0 |
-| zod | ^3.0.0 |
-| langchain | ^1.0.0 |
-| @langchain/core | ~1.1.0 |
-| mcp-use | ^1.0.0 |
+```bash
+npm view typescript version
+npm view react version
+npm view zod version
+```
 
-Always verify the latest version with `npm view <package> version` before scaffolding if the project has specific version requirements.
+For a full package set, prefer a small loop so the selected stack is checked in one pass:
+
+```bash
+for package in typescript @types/node vite react react-dom react-router zod pino; do
+  npm view "$package" version
+done
+```
+
+Use the live result to decide whether to pin exact versions, use `^` ranges, or use tighter ranges for peer-sensitive packages. For Node.js itself, check the official Node.js download/release page and use the active LTS that matches the deployment target.
+
+### Verified Snapshot
+
+This snapshot was checked on 2026-06-20 with `npm view <package> version` and the Node.js download page. It is evidence that older examples were stale, not a substitute for live verification.
+
+| Package | Verified latest stable |
+|---------|------------------------|
+| Node.js LTS | 24.17.0 |
+| typescript | 6.0.3 |
+| @types/node | 26.0.0 |
+| vite | 8.0.16 |
+| @vitejs/plugin-react | 6.0.2 |
+| react | 19.2.7 |
+| react-dom | 19.2.7 |
+| react-router | 8.0.1 |
+| next | 16.2.9 |
+| @tanstack/react-query | 5.101.0 |
+| @tanstack/react-query-devtools | 5.101.0 |
+| @mui/material | 9.1.1 |
+| @mui/icons-material | 9.1.1 |
+| @emotion/react | 11.14.0 |
+| @emotion/styled | 11.14.1 |
+| @fontsource/roboto | 5.2.10 |
+| eslint | 10.5.0 |
+| @eslint/js | 10.0.1 |
+| typescript-eslint | 8.61.1 |
+| eslint-config-prettier | 10.1.8 |
+| eslint-plugin-react | 7.37.5 |
+| eslint-plugin-react-hooks | 7.1.1 |
+| prettier | 3.8.4 |
+| vitest | 4.1.9 |
+| @vitest/coverage-v8 | 4.1.9 |
+| happy-dom | 20.10.6 |
+| jsdom | 29.1.1 |
+| @testing-library/react | 16.3.2 |
+| @testing-library/jest-dom | 6.9.1 |
+| @testing-library/user-event | 14.6.1 |
+| lodash-es | 4.18.1 |
+| luxon | 3.7.2 |
+| zod | 4.4.3 |
+| tsx | 4.22.4 |
+| fastify | 5.8.5 |
+| pino | 10.3.1 |
+| langchain | 1.5.0 |
+| @langchain/core | 1.2.0 |
+| @langchain/openai | 1.5.1 |
+| @langchain/langgraph | 1.4.4 |
+| mcp-use | 1.32.1 |
+| @tsconfig/node-lts | 24.0.0 |
+| @tsconfig/vite-react | 8.0.6 |
+| @tsconfig/strictest | 2.0.8 |

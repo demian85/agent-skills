@@ -10,15 +10,18 @@ Complete guide for setting up LangChain, MCP, and related AI tooling.
 
 ## Dependencies
 
-```json
-{
-  "dependencies": {
-    "langchain": "^1.0.0",
-    "@langchain/core": "~1.1.0",
-    "mcp-use": "^1.0.0",
-    "zod": "^3.0.0"
-  }
-}
+Verify current stable versions first:
+
+```bash
+for package in langchain @langchain/core @langchain/openai @langchain/langgraph mcp-use zod; do
+  npm view "$package" version
+done
+```
+
+Then install the compatible set the project needs:
+
+```bash
+npm install langchain @langchain/core @langchain/openai @langchain/langgraph mcp-use zod
 ```
 
 ## Critical: @langchain/core Version Alignment
@@ -28,12 +31,12 @@ All LangChain packages transitively depend on `@langchain/core`. They must share
 ```json
 {
   "dependencies": {
-    "langchain": "^1.4.0",
-    "@langchain/core": "~1.1.0",
-    "@langchain/openai": "^0.5.0"
+    "langchain": "<verified-latest-compatible>",
+    "@langchain/core": "<verified-compatible-core>",
+    "@langchain/openai": "<verified-latest-compatible>"
   },
   "overrides": {
-    "@langchain/core": "~1.1.0"
+    "@langchain/core": "<verified-compatible-core>"
   }
 }
 ```

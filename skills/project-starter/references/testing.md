@@ -4,17 +4,18 @@ Complete guide for configuring Vitest with this tech stack.
 
 ## Dependencies
 
-```json
-{
-  "devDependencies": {
-    "vitest": "^4.0.0",
-    "@vitest/coverage-v8": "^4.0.0",
-    "jsdom": "^26.0.0",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/user-event": "^14.0.0"
-  }
-}
+Verify current stable versions first:
+
+```bash
+for package in vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event; do
+  npm view "$package" version
+done
+```
+
+Then install the packages needed for the selected project:
+
+```bash
+npm install -D vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
 ```
 
 For backend-only projects, omit `jsdom` and `@testing-library/*` packages.

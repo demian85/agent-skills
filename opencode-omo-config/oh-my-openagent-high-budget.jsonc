@@ -41,7 +41,7 @@
       ]
     },
     "oracle": {
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-terra",
       "variant": "high",
       "fallback_models": ["opencode-go/glm-5.2"]
     },
@@ -55,7 +55,7 @@
       ]
     },
     "multimodal-looker": {
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-terra",
       "variant": "medium",
       "fallback_models": [
         "opencode-go/kimi-k2.6",
@@ -64,12 +64,12 @@
       ]
     },
     "prometheus": {
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-terra",
       "variant": "high",
       "fallback_models": ["opencode-go/glm-5.2", "opencode-go/kimi-k2.7-code"]
     },
     "metis": {
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-terra",
       "variant": "high",
       "fallback_models": ["opencode-go/glm-5.2", "opencode-go/kimi-k2.7-code"]
     },
@@ -165,7 +165,7 @@
       ]
     },
     "unspecified-high": {
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-terra",
       "variant": "high",
       "fallback_models": ["opencode-go/kimi-k2.7-code", "opencode-go/glm-5.2"]
     },
@@ -193,6 +193,7 @@
       "openai/gpt-5.5": 2,
       "openai/gpt-5.6-sol": 2,
       "openai/gpt-5.6-sol:xhigh": 1,
+      "openai/gpt-5.6-terra": 2,
       "openai/gpt-5.6-terra:xhigh": 1,
       "openai/gpt-5.6-luna:xhigh": 1,
       "venice/grok-41-fast": 1

@@ -38,9 +38,14 @@ The `opencode-omo-config/` directory contains reusable OpenCode and OMO configur
 |------|---------|
 | `opencode-omo-config/opencode.jsonc` | Example OpenCode config that enables the `oh-my-openagent@latest` plugin, defines Builder/Planner agent prompts, and denies access to `.env` files while allowing `.env.example` |
 | `opencode-omo-config/omo.jsonc` | Default OMO multi-harness model routing and fallback config |
+| `opencode-omo-config/omo-low-budget.jsonc` | OpenCode Go-first routing, with OpenAI reserved for the GPT-native Hephaestus agent |
+| `opencode-omo-config/omo-mid-budget.jsonc` | The default routing strategy updated to prefer Kimi K3 for compatible orchestration and visual roles |
+| `opencode-omo-config/omo-high-budget.jsonc` | OpenAI Pro and OpenCode Go routing with Venice models only at the end of compatible fallback chains and no Claude models |
 | `opencode-omo-config/prompts/*.md` | Prompt templates referenced by the OpenCode agent definitions |
 
-Copy `opencode.jsonc` into your OpenCode configuration location and `omo.jsonc` to `~/.omo/omo.jsonc`, then adjust model/provider names for your own setup. Keep private API keys and local environment values outside this repository.
+Copy `opencode.jsonc` into your OpenCode configuration location and copy one OMO profile to `~/.omo/omo.jsonc`, then adjust model/provider names for your authenticated subscriptions. The budget files are standalone alternatives, not files that OMO loads by those names. Run `opencode models` to confirm availability and `bunx oh-my-openagent doctor --verbose` after installation to inspect effective resolution.
+
+The unified OMO schema permits a `[codex]` block, but Codex Light and OpenCode do not share model selection. Codex models and managed agent roles remain in `~/.codex/config.toml` and `~/.codex/agents/*.toml`; these OMO examples use `[codex]` only for the shared CodeGraph loader. Keep private API keys and local environment values outside this repository. See the current [agent/model matching](https://omo.dev/docs#agent-model-matching) and [configuration](https://omo.dev/docs#configuration) references before changing the routing.
 
 ## Skill Discovery
 

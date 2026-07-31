@@ -12,6 +12,7 @@ Generated: 2026-06-23
 opencode-omo-config/
 |-- opencode.jsonc
 |-- omo.jsonc
+|-- omo-{low,mid,high}-budget.jsonc
 `-- prompts/
     |-- builder.md
     |-- planner.md
@@ -23,7 +24,7 @@ opencode-omo-config/
 | Task | Location | Notes |
 |------|----------|-------|
 | Change OpenCode agents or permissions | `opencode.jsonc` | Includes plugin activation, prompts, models, and env-file guardrails. |
-| Change OMO model routing | `omo.jsonc` | Single default multi-harness profile. |
+| Change OMO model routing | `omo.jsonc`, `omo-*-budget.jsonc` | Default and standalone budget-tier multi-harness profiles. |
 | Change agent prompts | `prompts/*.md` | Referenced by `opencode.jsonc`. |
 | Change public docs | `../README.md` | Keep the config table in sync. |
 

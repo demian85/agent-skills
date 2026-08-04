@@ -127,7 +127,6 @@
       },
       "writing": {
         "model": "opencode-go/kimi-k3",
-        "variant": "low",
         "fallback_models": ["openai/gpt-5.4-mini", "opencode-go/minimax-m3"]
       }
     },

@@ -37,7 +37,6 @@
       },
       "metis": {
         "model": "opencode-go/kimi-k3",
-        "variant": "low",
         "fallback_models": ["opencode-go/glm-5.2"]
       },
       "momus": {
@@ -87,7 +86,6 @@
       },
       "writing": {
         "model": "opencode-go/kimi-k3",
-        "variant": "low",
         "fallback_models": ["opencode-go/minimax-m3"]
       }
     },

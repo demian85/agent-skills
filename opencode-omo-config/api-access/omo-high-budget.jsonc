@@ -51,7 +51,6 @@
       },
       "prometheus": {
         "model": "venice/kimi-k3",
-        "variant": "max",
         "fallback_models": [
           { "model": "openai/gpt-5.6-sol", "variant": "high" },
           "venice/zai-org-glm-5-2"
@@ -59,7 +58,6 @@
       },
       "metis": {
         "model": "venice/kimi-k3",
-        "variant": "low",
         "fallback_models": [
           { "model": "openai/gpt-5.6-sol", "variant": "high" },
           "venice/zai-org-glm-5-2"
@@ -93,7 +91,6 @@
     "categories": {
       "visual-engineering": {
         "model": "venice/kimi-k3",
-        "variant": "max",
         "fallback_models": [
           { "model": "venice/zai-org-glm-5-2", "variant": "max" },
           "venice/grok-4-5"
@@ -119,7 +116,6 @@
       },
       "artistry": {
         "model": "venice/kimi-k3",
-        "variant": "max",
         "fallback_models": [
           { "model": "openai/gpt-5.6-sol", "variant": "high" },
           "venice/grok-4-5"
@@ -144,7 +140,6 @@
       },
       "unspecified-high": {
         "model": "venice/kimi-k3",
-        "variant": "max",
         "fallback_models": [
           { "model": "openai/gpt-5.6-sol", "variant": "high" },
           "venice/zai-org-glm-5-2",
@@ -153,7 +148,6 @@
       },
       "writing": {
         "model": "venice/kimi-k3",
-        "variant": "low",
         "fallback_models": [
           "openai/gpt-5.4-mini",
           "venice/minimax-m3-preview",

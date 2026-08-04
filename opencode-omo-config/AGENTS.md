@@ -11,8 +11,10 @@ Generated: 2026-06-23
 ```text
 opencode-omo-config/
 |-- opencode.jsonc
-|-- omo.jsonc
-|-- omo-{low,mid,high}-budget.jsonc
+|-- opencode-go/
+|   `-- omo-{low,mid,high}-budget.jsonc
+|-- api-access/
+|   `-- omo-{low,mid,high}-budget.jsonc
 `-- prompts/
     |-- builder.md
     |-- planner.md
@@ -24,7 +26,8 @@ opencode-omo-config/
 | Task | Location | Notes |
 |------|----------|-------|
 | Change OpenCode agents or permissions | `opencode.jsonc` | Includes plugin activation, prompts, models, and env-file guardrails. |
-| Change OMO model routing | `omo.jsonc`, `omo-*-budget.jsonc` | Default and standalone budget-tier multi-harness profiles. |
+| Change OpenCode Go subscription routing | `opencode-go/omo-*-budget.jsonc` | Budget-tier profiles for an active OpenCode Go subscription. |
+| Change Venice API-access routing | `api-access/omo-*-budget.jsonc` | Budget-tier profiles that route through Venice instead of OpenCode Go. |
 | Change agent prompts | `prompts/*.md` | Referenced by `opencode.jsonc`. |
 | Change public docs | `../README.md` | Keep the config table in sync. |
 
@@ -35,6 +38,8 @@ opencode-omo-config/
 - Keep `.env` and `.env.*` denied while allowing `.env.example` where templates need it.
 - Keep prompt file references relative to `opencode.jsonc`, for example `{file:./prompts/builder.md}`.
 - When adding a config file, update the README table.
+- The `opencode-go/` profiles keep OpenCode Go as the primary provider; Sisyphus is pinned to `opencode-go/kimi-k2.7-code`.
+- The `api-access/` profiles replace OpenCode Go models with equivalent `venice/...` models; Sisyphus uses `venice/kimi-k2-7-code`. The low profile is Venice-only (no OpenAI).
 
 ## ANTI-PATTERNS
 

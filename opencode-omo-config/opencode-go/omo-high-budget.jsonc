@@ -1,17 +1,14 @@
-// High-budget OMO profile: OpenAI Pro + OpenCode Go, Venice only as a final fallback.
+// High-budget OMO profile: OpenAI Pro + OpenCode Go, with Kimi K2.7 used for Sisyphus and Venice only as a final fallback.
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json",
   "profiles": {},
   "[opencode]": {
     "agents": {
-      // Kimi K3 is the strongest supported non-Claude orchestrator.
+      // Kimi K2.7 is the pinned non-Claude orchestrator for Sisyphus.
       "sisyphus": {
-        "model": "opencode-go/kimi-k3",
-        "fallback_models": [
-          { "model": "openai/gpt-5.6-sol", "variant": "medium" },
-          "opencode-go/glm-5.2"
-        ],
-        "ultrawork": { "model": "opencode-go/kimi-k3" }
+        "model": "opencode-go/kimi-k2.7-code",
+        "fallback_models": ["opencode-go/glm-5.2"],
+        "ultrawork": { "model": "opencode-go/kimi-k2.7-code" }
       },
       "hephaestus": {
         "model": "openai/gpt-5.6-sol",

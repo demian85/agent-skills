@@ -5,9 +5,9 @@
   "[opencode]": {
     "agents": {
       "sisyphus": {
-        "model": "opencode-go/kimi-k3",
-        "fallback_models": ["opencode-go/kimi-k2.7-code", "opencode-go/glm-5.2"],
-        "ultrawork": { "model": "opencode-go/kimi-k3" }
+        "model": "opencode-go/kimi-k2.7-code",
+        "fallback_models": ["opencode-go/glm-5.2"],
+        "ultrawork": { "model": "opencode-go/kimi-k2.7-code" }
       },
       // Hephaestus is GPT-native. This is the only normal OpenAI assignment.
       "hephaestus": {

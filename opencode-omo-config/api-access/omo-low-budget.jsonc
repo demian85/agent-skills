@@ -1,0 +1,130 @@
+// Low-budget API-access OMO profile: Venice-only, no OpenCode Go or OpenAI.
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json",
+  "profiles": {},
+  "[opencode]": {
+    "agents": {
+      "sisyphus": {
+        "model": "venice/kimi-k2-7-code",
+        "fallback_models": ["venice/zai-org-glm-5-2"],
+        "ultrawork": { "model": "venice/kimi-k2-7-code" }
+      },
+      // Hephaestus uses DeepSeek V4 Pro in this Venice-only profile.
+      "hephaestus": {
+        "model": "venice/deepseek-v4-pro",
+        "variant": "medium"
+      },
+      "oracle": {
+        "model": "venice/zai-org-glm-5-2",
+        "fallback_models": ["venice/kimi-k3"]
+      },
+      "librarian": {
+        "model": "venice/qwen-3-7-plus",
+        "fallback_models": ["venice/minimax-m3-preview", "venice/minimax-m27"]
+      },
+      "explore": {
+        "model": "venice/qwen-3-7-plus",
+        "fallback_models": ["venice/minimax-m3-preview", "venice/minimax-m27"]
+      },
+      "multimodal-looker": {
+        "model": "venice/kimi-k3",
+        "fallback_models": ["venice/zai-org-glm-5-2"]
+      },
+      "prometheus": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": ["venice/kimi-k2-7-code", "venice/zai-org-glm-5-2"]
+      },
+      "metis": {
+        "model": "venice/kimi-k3",
+        "variant": "low",
+        "fallback_models": ["venice/zai-org-glm-5-2"]
+      },
+      "momus": {
+        "model": "venice/zai-org-glm-5-2",
+        "fallback_models": ["venice/kimi-k3"]
+      },
+      "atlas": {
+        "model": "venice/kimi-k3",
+        "fallback_models": ["venice/minimax-m3-preview", "venice/minimax-m27"]
+      },
+      "sisyphus-junior": {
+        "model": "venice/kimi-k3",
+        "fallback_models": ["venice/minimax-m3-preview", "venice/minimax-m27"]
+      }
+    },
+    "categories": {
+      "visual-engineering": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": [{ "model": "venice/zai-org-glm-5-2", "variant": "max" }]
+      },
+      "ultrabrain": {
+        "model": "venice/zai-org-glm-5-2",
+        "fallback_models": ["venice/kimi-k3"]
+      },
+      "deep": {
+        "model": "venice/kimi-k3",
+        "fallback_models": ["venice/zai-org-glm-5-2"]
+      },
+      "artistry": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": ["venice/zai-org-glm-5-2"]
+      },
+      "quick": {
+        "model": "venice/minimax-m27",
+        "fallback_models": ["venice/minimax-m3-preview"]
+      },
+      "unspecified-low": {
+        "model": "venice/kimi-k2-7-code",
+        "fallback_models": ["venice/minimax-m3-preview", "venice/minimax-m27"]
+      },
+      "unspecified-high": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": ["venice/zai-org-glm-5-2"]
+      },
+      "writing": {
+        "model": "venice/kimi-k3",
+        "variant": "low",
+        "fallback_models": ["venice/minimax-m3-preview"]
+      }
+    },
+    "disabled_providers": ["anthropic", "google", "opencode-go", "openai"],
+    "model_fallback": true,
+    "runtime_fallback": {
+      "enabled": true,
+      "retry_on_errors": [400, 401, 403, 404, 429, 500, 502, 503, 504],
+      "max_fallback_attempts": 3,
+      "cooldown_seconds": 30,
+      "timeout_seconds": 20,
+      "notify_on_fallback": true
+    },
+    "model_capabilities": {
+      "enabled": true,
+      "auto_refresh_on_start": true,
+      "refresh_timeout_ms": 5000
+    },
+    "background_task": {
+      "providerConcurrency": {
+        "venice": 8
+      },
+      "modelConcurrency": {
+        "venice/kimi-k3": 5,
+        "venice/kimi-k2-7-code": 5,
+        "venice/zai-org-glm-5-2": 3,
+        "venice/deepseek-v4-pro": 1
+      }
+    },
+    "git_master": {
+      "commit_footer": true,
+      "include_co_authored_by": false,
+      "git_env_prefix": "GIT_MASTER=1"
+    }
+  },
+  // Codex Light keeps model selection in ~/.codex/config.toml and its agent TOMLs.
+  "[codex]": {
+    "codegraph": {}
+  }
+}

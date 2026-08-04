@@ -1,0 +1,205 @@
+// High-budget API-access OMO profile: Venice + OpenAI, no OpenCode Go.
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json",
+  "profiles": {},
+  "[opencode]": {
+    "agents": {
+      // Kimi K2.7 is the pinned non-Claude orchestrator for Sisyphus.
+      "sisyphus": {
+        "model": "venice/kimi-k2-7-code",
+        "fallback_models": ["venice/zai-org-glm-5-2"],
+        "ultrawork": { "model": "venice/kimi-k2-7-code" }
+      },
+      "hephaestus": {
+        "model": "openai/gpt-5.6-sol",
+        "variant": "medium"
+      },
+      "oracle": {
+        "model": "openai/gpt-5.6-sol",
+        "variant": "xhigh",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-terra", "variant": "high" },
+          "venice/zai-org-glm-5-2"
+        ]
+      },
+      "librarian": {
+        "model": "openai/gpt-5.4-mini-fast",
+        "fallback_models": [
+          "venice/qwen-3-7-plus",
+          "venice/minimax-m3-preview",
+          "openai/gpt-5.4-mini",
+          "venice/grok-4-5"
+        ]
+      },
+      "explore": {
+        "model": "openai/gpt-5.4-mini-fast",
+        "fallback_models": [
+          "venice/qwen-3-7-plus",
+          "venice/minimax-m3-preview",
+          "openai/gpt-5.4-mini",
+          "venice/grok-4-5"
+        ]
+      },
+      "multimodal-looker": {
+        "model": "openai/gpt-5.6-sol",
+        "variant": "low",
+        "fallback_models": [
+          "venice/kimi-k3",
+          "openai/gpt-5.4-mini",
+          "venice/grok-4-5"
+        ]
+      },
+      "prometheus": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "high" },
+          "venice/zai-org-glm-5-2"
+        ]
+      },
+      "metis": {
+        "model": "venice/kimi-k3",
+        "variant": "low",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "high" },
+          "venice/zai-org-glm-5-2"
+        ]
+      },
+      "momus": {
+        "model": "openai/gpt-5.6-terra",
+        "variant": "high",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "xhigh" },
+          "venice/zai-org-glm-5-2"
+        ]
+      },
+      "atlas": {
+        "model": "venice/kimi-k3",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "medium" },
+          "venice/minimax-m3-preview",
+          "venice/grok-4-5"
+        ]
+      },
+      "sisyphus-junior": {
+        "model": "venice/kimi-k3",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "medium" },
+          "venice/minimax-m3-preview",
+          "venice/grok-4-5"
+        ]
+      }
+    },
+    "categories": {
+      "visual-engineering": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": [
+          { "model": "venice/zai-org-glm-5-2", "variant": "max" },
+          "venice/grok-4-5"
+        ]
+      },
+      "ultrabrain": {
+        "model": "openai/gpt-5.6-sol",
+        "variant": "xhigh",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-terra", "variant": "xhigh" },
+          "venice/zai-org-glm-5-2",
+          "venice/grok-4-5"
+        ]
+      },
+      "deep": {
+        "model": "openai/gpt-5.6-sol",
+        "variant": "medium",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-terra", "variant": "high" },
+          "venice/kimi-k3",
+          "venice/grok-4-5"
+        ]
+      },
+      "artistry": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "high" },
+          "venice/grok-4-5"
+        ]
+      },
+      "quick": {
+        "model": "openai/gpt-5.4-mini",
+        "variant": "minimal",
+        "fallback_models": [
+          "venice/minimax-m3-preview",
+          "venice/grok-4-5"
+        ]
+      },
+      "unspecified-low": {
+        "model": "openai/gpt-5.6-luna",
+        "variant": "xhigh",
+        "fallback_models": [
+          "venice/kimi-k3",
+          "venice/minimax-m3-preview",
+          "venice/grok-4-5"
+        ]
+      },
+      "unspecified-high": {
+        "model": "venice/kimi-k3",
+        "variant": "max",
+        "fallback_models": [
+          { "model": "openai/gpt-5.6-sol", "variant": "high" },
+          "venice/zai-org-glm-5-2",
+          "venice/grok-4-5"
+        ]
+      },
+      "writing": {
+        "model": "venice/kimi-k3",
+        "variant": "low",
+        "fallback_models": [
+          "openai/gpt-5.4-mini",
+          "venice/minimax-m3-preview",
+          "venice/grok-4-5"
+        ]
+      }
+    },
+    "disabled_providers": ["anthropic", "google", "opencode-go"],
+    "model_fallback": true,
+    "runtime_fallback": {
+      "enabled": true,
+      "retry_on_errors": [400, 401, 403, 404, 429, 500, 502, 503, 504],
+      "max_fallback_attempts": 4,
+      "cooldown_seconds": 30,
+      "timeout_seconds": 20,
+      "notify_on_fallback": true
+    },
+    "model_capabilities": {
+      "enabled": true,
+      "auto_refresh_on_start": true,
+      "refresh_timeout_ms": 5000
+    },
+    "background_task": {
+      "providerConcurrency": {
+        "openai": 5,
+        "venice": 8
+      },
+      "modelConcurrency": {
+        "openai/gpt-5.6-sol": 3,
+        "openai/gpt-5.6-sol:xhigh": 2,
+        "openai/gpt-5.6-terra": 3,
+        "openai/gpt-5.6-terra:xhigh": 2,
+        "openai/gpt-5.6-luna:xhigh": 2,
+        "venice/kimi-k3": 5,
+        "venice/kimi-k2-7-code": 5,
+        "venice/grok-4-5": 1
+      }
+    },
+    "git_master": {
+      "commit_footer": true,
+      "include_co_authored_by": false,
+      "git_env_prefix": "GIT_MASTER=1"
+    }
+  },
+  // Codex Light keeps model selection in ~/.codex/config.toml and its agent TOMLs.
+  "[codex]": {
+    "codegraph": {}
+  }
+}
